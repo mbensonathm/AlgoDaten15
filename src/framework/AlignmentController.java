@@ -7,7 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import lexer.ILexer;
+import token.IToken;
+import lexer.*;
 
 public class AlignmentController {
 	final private String original;

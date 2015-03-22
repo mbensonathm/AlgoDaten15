@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import token.*;
 import triePackage.ITrie;
+import triePackage.Trie;
 
 public class SimpleLexer implements ILexer{
 	final private BufferedReader reader;
@@ -18,7 +20,8 @@ public class SimpleLexer implements ILexer{
 		this.reader = reader;
 		line = reader.readLine();
 		if(line != null) tk = new StringTokenizer(line);
-		ITrie trie = new Trie(mapFactory);
+		this.trie = null; //new Trie(mapFactory);
+		
 	}
 	
 	public IToken getNextToken() throws IOException{
