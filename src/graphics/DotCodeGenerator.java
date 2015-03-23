@@ -28,8 +28,8 @@ public class DotCodeGenerator {
 		String filePath = filePathAndName.substring(0,filePathAndName.lastIndexOf(File.separator));
 		String workingDir = System.getProperty("user.dir");
 		// Call Graphviz program with text file
-		Process p = Runtime.getRuntime().exec("\"" + workingDir + "\\src\\graphics\\bin\\dot.exe\" -o \"" + filePath + "\\graph.png\" -Tpng " + "\""+filePathAndName + "\"");
-		System.out.println(filePath + "\\graph.png");
+		Process p = Runtime.getRuntime().exec("\"" + workingDir + "\\src\\graphics\\bin\\dot.exe\" -o \"" + filePath + "\\graph.gif\" -Tgif " + "\""+filePathAndName + "\"");
+		Process p2 = Runtime.getRuntime().exec("explorer \"" + filePath + "\\graph.gif\"");
 	}
 
 }
