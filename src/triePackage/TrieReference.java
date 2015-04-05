@@ -1,23 +1,30 @@
 package triePackage;
 
 public class TrieReference implements ITrieReference{
+	
+	private boolean found;
+	private Object value;
+	private ITrieNode trieNode;
+	
+	public TrieReference(boolean found, Object value, ITrieNode trieNode){
+		this.found = found;
+		this.value = value;
+		this.trieNode = trieNode;
+	}
 
 	@Override
 	public boolean getFound() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.found;
 	}
 
 	@Override
 	public Object getValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.value;
 	}
 
 	@Override
 	public ITrieNode getNode() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.trieNode;
 	}
 
 }

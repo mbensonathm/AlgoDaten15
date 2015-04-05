@@ -6,7 +6,7 @@ import actionsPackage.IActionAtInsert;
 
 public interface ITrieNode {
 	
-	ITrieReference recursivInsert(Iterator iterator, IActionAtInsert actionAtInsert);
+	ITrieReference recursivInsert(Iterator<Comparable> iterator, IActionAtInsert actionAtInsert);
 	
 	ITrieReference recursivInsert(String s, IActionAtInsert actionAtInsert);
 

@@ -15,5 +15,9 @@ public interface ITrie {
 	public ITrieReference insert(Iterator iterator, IActionAtInsert value);
 	
 	public ITrieReference insert (String string, IActionAtInsert value);
+	
+	public ITrieReference lookup(Iterator iterator);
+	
+	public ITrieReference lookup(String string);
 
 }

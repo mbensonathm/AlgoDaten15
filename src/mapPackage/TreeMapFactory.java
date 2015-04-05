@@ -1,13 +1,15 @@
 package mapPackage;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import triePackage.ITrieNode;
 
 public class TreeMapFactory implements IMapFactory{
 
 	@Override
 	public Map create() {
-		// TODO Auto-generated method stub
-		return null;
+		return new HashMap<Integer, ITrieNode>();
 	}
 
 }

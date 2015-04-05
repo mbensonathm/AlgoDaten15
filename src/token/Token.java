@@ -1,22 +1,30 @@
 package token;
 
-public class Token implements IToken{
+import triePackage.ITrieReference;
 
-	public Token(int a, int b){
-		// TODO Complete ctor
+public class Token implements IToken{
+	
+	private int classCode;
+	private int relativeCode;
+
+	public Token(ITrieReference ref){
+		// TODO: NEEDS TO BE CHANGED FOR OTHER CLASS TYPES
+		this.classCode = IToken.IDENTIFIER;
+		this.relativeCode = (Integer) ref.getValue();
 	}
 	
 	@Override
 	public int getClassCode() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.classCode;
 	}
 
 	@Override
 	public int getRelativeCode() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.relativeCode;
 	}
-
+	
+	public String toString(){
+		return "Class: " + getClassCode() + " Relative: " + getRelativeCode();
+	}
 	
 }

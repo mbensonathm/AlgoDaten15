@@ -33,5 +33,6 @@ public class AlignmentController {
 			System.out.println("Gelesen: " + token);
 			token = lexer.getNextToken();
 		}
+		System.out.println("Lesen fertig.");
 	}
 }

@@ -4,14 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import mapPackage.IMapFactory;
+import mapPackage.TreeMapFactory;
 import actionsPackage.*;
 import token.*;
 import triePackage.ITrie;
+import triePackage.ITrieReference;
 import triePackage.Trie;
 
 public class SimpleLexer implements ILexer{
 	final private BufferedReader reader;
-	//final private IMapFactory mapFactory = new TreeMapFactory();
+	final private IMapFactory mapFactory = new TreeMapFactory();
 	final private IActionAtInsert action = new StringCoding(4711);
 	final private ITrie trie;
 	private String line;
@@ -21,7 +24,7 @@ public class SimpleLexer implements ILexer{
 		this.reader = reader;
 		line = reader.readLine();
 		if(line != null) tk = new StringTokenizer(line);
-		this.trie = null; //new Trie(mapFactory);
+		this.trie = new Trie(mapFactory);
 		
 	}
 	
@@ -36,8 +39,8 @@ public class SimpleLexer implements ILexer{
 				if(tk.hasMoreTokens()){
 					String intermediate = tk.nextToken();
 					//Log.println(Log.URGENT, "--- next token:" + intermediate);
-					result = (IToken) trie.insert(intermediate, action);
-					result = new Token(-1, -1);
+					ITrieReference ref = trie.insert(intermediate, action);
+					result = new Token(ref);
 					foundToken = true;
 				}
 				else{

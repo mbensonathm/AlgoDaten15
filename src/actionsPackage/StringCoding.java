@@ -25,14 +25,16 @@ public class StringCoding implements IActionAtInsert{
 
 	@Override
 	public void setActualValue(Object value) {
-		// TODO Auto-generated method stub
-		
+		setActualValue((Integer) value);
 	}
 
 	@Override
 	public Object getActualValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.counter;
+	}
+	
+	public String toString(){
+		return "Counter = " + counter;
 	}
 
 }
