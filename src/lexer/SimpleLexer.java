@@ -63,7 +63,7 @@ public class SimpleLexer implements ILexer{
 	}
 	
 	public String toString(){
-		return "\nResult Trie \n" + trie;
+		return trie.toString();
 	}
 	
 

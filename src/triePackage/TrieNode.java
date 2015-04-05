@@ -61,5 +61,24 @@ public class TrieNode implements ITrieNode{
 			return next.recursivInsert(s.substring(1), actionAtInsert);
 		}
 	}
+	
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		if (this.value != null){
+			sb.append(this.hashCode() + " [label=\"" + this.value + "\"];");
+		}
+		else{
+			sb.append(this.hashCode() + " [label=\"\"];");
+		}
+		for (ITrieNode node : outgoingEdgeMap.values()){
+			sb.append(this.hashCode() + " -> " + node.hashCode() + "[label = \"  " + node.getIncomingEdge() + "\"];\n");
+			sb.append(node.toString());
+		}
+		return sb.toString();
+	}
+	@Override
+	public Comparable getIncomingEdge() {
+		return this.incomingPartialKey;
+	}
 
 }

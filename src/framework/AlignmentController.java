@@ -1,4 +1,6 @@
 package framework;
+import graphics.DotCodeGenerator;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,5 +36,6 @@ public class AlignmentController {
 			token = lexer.getNextToken();
 		}
 		System.out.println("Lesen fertig.");
+		DotCodeGenerator.renderImage(lexer.toString());
 	}
 }
