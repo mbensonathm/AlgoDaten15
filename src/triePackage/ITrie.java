@@ -1,7 +1,8 @@
 package triePackage;
 
 import java.util.Iterator;
-import actionsPackage.IActionsAtInsert;
+
+import actionsPackage.IActionAtInsert;
 
 /**
  * test
@@ -11,7 +12,8 @@ import actionsPackage.IActionsAtInsert;
  */
 public interface ITrie {
 
-	public void insert(Iterator iterator, IActionsAtInsert actionAtInsert);
-	public void insert(String string, IActionsAtInsert actionAtInsert);
+	public ITrieReference insert(Iterator iterator, IActionAtInsert value);
+	
+	public ITrieReference insert (String string, IActionAtInsert value);
 
 }

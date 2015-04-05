@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import mapPackage.IMapFactory;
-import actionsPackage.IActionsAtInsert;
+import actionsPackage.IActionAtInsert;
 
 public class TreeNode implements ITrieNode{
 	final private Map outgoingEdgeMap;
@@ -20,7 +20,13 @@ public class TreeNode implements ITrieNode{
 	}
 	@Override
 	public ITrieReference recursivInsert(Iterator iterator,
-			IActionsAtInsert actionAtInsert) {
+			IActionAtInsert actionAtInsert) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ITrieReference recursivInsert(String s,
+			IActionAtInsert actionAtInsert) {
 		// TODO Auto-generated method stub
 		return null;
 	}

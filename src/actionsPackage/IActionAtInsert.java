@@ -1,6 +1,6 @@
 package actionsPackage;
 
-public interface IActionsAtInsert {
+public interface IActionAtInsert {
 
 	public Object actionAtKeyNotFound();
 	public Object actionAtKeyFound(Object previous);

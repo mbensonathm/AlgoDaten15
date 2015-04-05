@@ -2,20 +2,22 @@ package triePackage;
 
 import java.util.Iterator;
 
-import actionsPackage.IActionsAtInsert;
+import actionsPackage.IActionAtInsert;
 
 public class Trie implements ITrie{
 
 	@Override
-	public void insert(Iterator iterator, IActionsAtInsert actionAtInsert) {
+	public triePackage.ITrieReference insert(Iterator iterator,
+			IActionAtInsert value) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void insert(String string, IActionsAtInsert actionAtInsert) {
+	public ITrieReference insert(String string, IActionAtInsert value) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
 
 }

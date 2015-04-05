@@ -1,8 +1,8 @@
 package actionsPackage;
 
-public class StringCoding implements IActionsAtInsert{
+public class StringCoding implements IActionAtInsert{
 	
-	/* zählt */
+	/* zï¿½hlt */
 	private int counter = 0;
 	
 	public StringCoding(int start) {
@@ -22,9 +22,17 @@ public class StringCoding implements IActionsAtInsert{
 	public Object actionAtKeyFound(Object previous) {
 		return previous;
 	}
-	
-	public int getActualValue(){
-		return this.counter;
+
+	@Override
+	public void setActualValue(Object value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Object getActualValue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
