@@ -2,14 +2,13 @@ package token;
 
 import triePackage.ITrieReference;
 
-public class Token implements IToken{
-	
+public class TokenTwo implements IToken {
+
 	private int classCode;
 	private int relativeCode;
 
-	public Token(ITrieReference ref){
-		// TODO: NEEDS TO BE CHANGED FOR OTHER CLASS TYPES
-		this.classCode = IToken.ID;
+	public TokenTwo(ITrieReference ref, int classCode){
+		this.classCode = classCode;
 		this.relativeCode = (Integer) ref.getValue();
 	}
 	
@@ -26,5 +25,4 @@ public class Token implements IToken{
 	public String toString(){
 		return "Class: " + getClassCode() + " Relative: " + getRelativeCode();
 	}
-	
 }

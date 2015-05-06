@@ -7,9 +7,9 @@ public class SimpleDFA implements IDFA {
 	private final int START_STATE = 0;
 	private final int FAILURE_STATE = 100;
 	private final int EOF_STATE = 101;
-	private final int ID_STATE = 102;
-	private final int PM_STATE = 103;
-	private final int WS_STATE = 104;
+	private final int ID_STATE = ID;
+	private final int PM_STATE = PM;
+	private final int WS_STATE = WS;
 	private final int FIRST_OF_DAY_STATE = 10;
 	private final int SECOND_OF_DAY_STATE = 11;
 	private final int DAY_STATE = 12;
@@ -17,23 +17,27 @@ public class SimpleDFA implements IDFA {
 	private final int SECOND_OF_MONTH_STATE = 14;
 	private final int MONTH_STATE = 15;
 	private final int FIRST_OF_YEAR_STATE = 16;
-	private final int DATE_STATE = 105;
-	private final int INTCONS_STATE = 106;
+	private final int DATE_STATE = DATE;
+	private final int INTCONS_STATE = INTCON;
 
 	@Override
 	public int getInitial() {
 		return START_STATE;
+	}
+	
+	public int[] codesForTries(){
+		return new int[]{ID, PM, WS, DATE, INTCON};
 	}
 
 	@Override
 	public int trans(int state, int symbol) {
 		switch (state) {
 		case START_STATE:
+			if(symbol == -1){return EOF_STATE;}
 			if (Character.isWhitespace(symbol)) {
 				return WS_STATE;
 			}
-			if (Pattern.matches("\\p{Punct}", Character.toChars(symbol)
-					.toString())) {
+			if (Pattern.matches("\\p{Punct}", Character.toString(Character.toChars(symbol)[0]))) {
 				return PM_STATE;
 			}
 			if (Character.isLetter(symbol)) {
@@ -116,7 +120,7 @@ public class SimpleDFA implements IDFA {
 
 	@Override
 	public boolean isFinal(int state) {
-		if (state >= 100) {
+		if (state >= 100 || state == 10 || state == 11) {
 			return true;
 		}
 		return false;
@@ -148,6 +152,19 @@ public class SimpleDFA implements IDFA {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int getFinalState(int state) {
+		switch (state){
+		case ID_STATE: return ID_STATE;
+		case WS_STATE: return WS_STATE;
+		case PM_STATE: return PM_STATE;
+		case FIRST_OF_DAY_STATE: return INTCONS_STATE;
+		case SECOND_OF_DAY_STATE: return INTCONS_STATE;
+		case DATE_STATE: return DATE_STATE;
+		default: return START_STATE;
+		}
 	}
 
 }

@@ -12,9 +12,9 @@ import actionsPackage.IActionAtInsert;
  */
 public interface ITrie {
 
-	public ITrieReference insert(Iterator iterator, IActionAtInsert value);
+	public ITrieReference insert(Iterator iterator);
 	
-	public ITrieReference insert (String string, IActionAtInsert value);
+	public ITrieReference insert (String string);
 	
 	public ITrieReference lookup(Iterator iterator);
 	

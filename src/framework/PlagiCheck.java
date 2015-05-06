@@ -1,5 +1,7 @@
 package framework;
 
+import java.util.regex.Pattern;
+
 public class PlagiCheck {
 
 	public static void main(String[] args) throws Exception{

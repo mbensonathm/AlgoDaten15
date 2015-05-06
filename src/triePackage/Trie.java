@@ -8,19 +8,21 @@ import actionsPackage.IActionAtInsert;
 public class Trie implements ITrie {
 
 	private ITrieNode root;
+	private IActionAtInsert action;
 
-	public Trie(IMapFactory mapFactory) {
+	public Trie(IMapFactory mapFactory, IActionAtInsert action) {
 		this.root = new TrieNode(mapFactory, null, null);
+		this.action = action;
 	}
 
 	@Override
-	public ITrieReference insert(String string, IActionAtInsert value) {
-		return root.recursivInsert(string, value);
+	public ITrieReference insert(String string) {
+		return root.recursivInsert(string, action);
 	}
 
 	@Override
-	public ITrieReference insert(Iterator iterator, IActionAtInsert value) {
-		return root.recursivInsert(iterator, value);
+	public ITrieReference insert(Iterator iterator) {
+		return root.recursivInsert(iterator, action);
 	}
 
 	@Override
@@ -34,8 +36,6 @@ public class Trie implements ITrie {
 	}
 
 	public String toString() {
-		return "digraph G { \n node [shape = circle, style = filled, color=red];\n"
-				+ root.toString()
-				+ "}";
+		return root.toString();
 	}
 }

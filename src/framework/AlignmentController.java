@@ -26,10 +26,10 @@ public class AlignmentController {
 	
 	public void run() throws FileNotFoundException, IOException{
 		InputStream inStreamOriginal = new FileInputStream(original);
-		Reader readerOringial = new InputStreamReader(inStreamOriginal);
-		BufferedReader inputOriginal = new BufferedReader(readerOringial);
-		
-		ILexer lexer = new SimpleLexer(inputOriginal);
+		Reader readerOriginal = new InputStreamReader(inStreamOriginal);
+//		BufferedReader inputOriginal = new BufferedReader(readerOriginal);
+//		ILexer lexer = new SimpleLexer(inputOriginal);
+		ILexer lexer = new BaseLexer(readerOriginal, new SimpleDFA());
 		IToken token = lexer.getNextToken();
 		while(token != null){
 			System.out.println("Gelesen: " + token);

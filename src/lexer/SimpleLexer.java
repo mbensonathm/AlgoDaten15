@@ -24,7 +24,7 @@ public class SimpleLexer implements ILexer{
 		this.reader = reader;
 		line = reader.readLine();
 		if(line != null) tk = new StringTokenizer(line);
-		this.trie = new Trie(mapFactory);
+		this.trie = new Trie(mapFactory, action);
 		
 	}
 	
@@ -39,7 +39,7 @@ public class SimpleLexer implements ILexer{
 				if(tk.hasMoreTokens()){
 					String intermediate = tk.nextToken();
 					//Log.println(Log.URGENT, "--- next token:" + intermediate);
-					ITrieReference ref = trie.insert(intermediate, action);
+					ITrieReference ref = trie.insert(intermediate);
 					result = new Token(ref);
 					foundToken = true;
 				}
@@ -63,7 +63,9 @@ public class SimpleLexer implements ILexer{
 	}
 	
 	public String toString(){
-		return trie.toString();
+		return "digraph G { \n node [shape = circle, style = filled, color=red];\n"
+				+ trie.toString()
+				+ "}";
 	}
 	
 
