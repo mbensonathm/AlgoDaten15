@@ -20,7 +20,7 @@ public class BaseLexer implements ILexer {
 	private IDFA auto;
 //	private ITrie trie;
 	private HashMap<Integer, ITrie> tries;
-	private IActionAtInsert action = new StringCoding(4711);
+//	private IActionAtInsert action = new StringCoding(4711);
 	private TreeMapFactory mapFactory = new TreeMapFactory();
 	
 	public BaseLexer(Reader r, IDFA auto){
@@ -32,7 +32,7 @@ public class BaseLexer implements ILexer {
 	private void initiateTries(int[] codes) {
 		this.tries = new HashMap<>();
 		for (int i : codes){
-			this.tries.put(i, new Trie(mapFactory, action));
+			this.tries.put(i, new Trie(mapFactory, new StringCoding(4711)));
 		}
 	}
 	
