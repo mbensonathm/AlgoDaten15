@@ -7,4 +7,5 @@ import token.IToken;
 public interface ILexer {
 	IToken getNextToken() throws IOException;
 	String decode(IToken token);
+	public String getOutput();
 }

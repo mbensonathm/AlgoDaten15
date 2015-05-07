@@ -67,6 +67,12 @@ public class SimpleLexer implements ILexer{
 				+ trie.toString()
 				+ "}";
 	}
+
+	@Override
+	public String getOutput() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

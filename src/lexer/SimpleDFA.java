@@ -142,13 +142,29 @@ public class SimpleDFA implements IDFA {
 
 	@Override
 	public String stateToString(int state) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (state) {
+		case (START_STATE): return "START_STATE";
+		case (FAILURE_STATE): return "FAILURE_STATE";
+		case (EOF_STATE): return "EOF_STATE";
+		case (ID_STATE): return "ID_STATE";
+		case (PM_STATE): return "PM_STATE";
+		case (WS_STATE): return "WS_STATE";
+		case (FIRST_OF_DAY_STATE): return "FIRST_OF_DAY_STATE"; 
+		case (SECOND_OF_DAY_STATE): return "SECOND_OF_DAY_STATE"; 
+		case (DAY_STATE): return "DAY_STATE"; 
+		case (FIRST_OF_MONTH_STATE): return "FIRST_OF_MONTH_STATE"; 
+		case (SECOND_OF_MONTH_STATE): return "SECOND_OF_MONTH_STATE"; 
+		case (MONTH_STATE): return "MONTH_STATE"; 
+		case (FIRST_OF_YEAR_STATE): return "FIRST_OF_YEAR_STATE"; 
+		case (INTCONS_STATE): return "INTCONS_STATE";
+		case (DATE_STATE): return "DATE_STATE"; 
+		default: return "--";
+		}
 	}
 
 	@Override
 	public boolean isEndofFile(int state) {
-		if (state == 101) {
+		if (state == EOF_STATE) {
 			return true;
 		}
 		return false;
@@ -163,7 +179,7 @@ public class SimpleDFA implements IDFA {
 		case FIRST_OF_DAY_STATE: return INTCONS_STATE;
 		case SECOND_OF_DAY_STATE: return INTCONS_STATE;
 		case DATE_STATE: return DATE_STATE;
-		default: return START_STATE;
+		default: return -1;
 		}
 	}
 
