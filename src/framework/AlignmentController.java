@@ -1,5 +1,5 @@
 package framework;
-import java.io.BufferedReader;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,16 +35,22 @@ public class AlignmentController {
 		ILexer lexer = new BaseLexer(readerOriginal, new SimpleDFA());
 		int callCounter = 1;
 		IToken token = lexer.getNextToken();
-		output += HTML_Generator.tableTags(lexer.getOutput());
+		generateHTMLForEntry(lexer.getOutput(), callCounter);
 		while(token != null){
 			System.out.println("Gelesen: " + token);
 			callCounter++;
 			token = lexer.getNextToken();
-			output += HTML_Generator.tableTags(lexer.getOutput());
+			generateHTMLForEntry(lexer.getOutput(), callCounter);
 		}
 		// Output stuff
 		System.out.println("Lesen fertig.");
 //		OutputFileGenerator.renderImage(lexer.toString());
 		OutputFileGenerator.renderHTML(HTML_Generator.creatDoc("Lexer", output));
+	}
+	
+	private void generateHTMLForEntry(String output, int ctr){
+		String html = HTML_Generator.divTags("GetNextToken called (" + ctr +")"
+											+ output);
+		this.output += html;
 	}
 }
