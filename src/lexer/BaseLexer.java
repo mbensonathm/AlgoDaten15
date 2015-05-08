@@ -47,7 +47,7 @@ public class BaseLexer implements ILexer {
 					+ HTML_Generator.tdTags("" + lastFinalState + " "
 							+ auto.stateToString(lastFinalState))
 					+ HTML_Generator.tdTags("" + tokenBuffer.length())
-					+ HTML_Generator.tdTags(">>" + tokenBuffer.toString()
+					+ HTML_Generator.tdTags(">>" + bufferToString(tokenBuffer, lastFinalPosition)
 							+ "<<"));
 			loopCount++;
 			if (auto.isFinal(state)) {
@@ -71,7 +71,7 @@ public class BaseLexer implements ILexer {
 				+ HTML_Generator.tdTags("" + lastFinalState + " "
 						+ auto.stateToString(lastFinalState))
 				+ HTML_Generator.tdTags("" + tokenBuffer.length())
-				+ HTML_Generator.tdTags(">>" + tokenBuffer.toString() + "<<"));
+				+ HTML_Generator.tdTags(">>" + bufferToString(tokenBuffer, lastFinalPosition) + "<<"));
 		output = HTML_Generator.tableTags(output);
 
 		// Save final state token to correct trie
@@ -105,6 +105,19 @@ public class BaseLexer implements ILexer {
 			// return new Token(new TrieReference(false, -1, null));
 		}
 		return null;
+	}
+	
+	private String bufferToString(StringBuffer b, int lastFinalPosition){
+		String s = "";
+		if (lastFinalPosition > 0){
+			s += b.substring(0, lastFinalPosition) + "|";
+			if (b.length() > lastFinalPosition){
+				s += b.substring(lastFinalPosition);
+			}
+		} else{
+			s += "|" + b.toString();
+		}
+		return s;
 	}
 
 	@Override
