@@ -36,15 +36,22 @@ public class AlignmentController {
 		int callCounter = 1;
 		IToken token = lexer.getNextToken();
 		generateHTMLForEntry(lexer.getOutput(), callCounter);
-		while(token != null){
+		while(token.getClassCode() > 0){
 			System.out.println("Gelesen: " + token);
 			callCounter++;
 			token = lexer.getNextToken();
 			generateHTMLForEntry(lexer.getOutput(), callCounter);
 		}
+		if (token.getClassCode() == -1){
+			output += HTML_Generator.divTags("First (original) reading loop finished.");
+		}
+		if (token.getClassCode() == -2){
+			output += HTML_Generator.divTags("Error reading the file.");
+		}
 		// Output stuff
 		System.out.println("Lesen fertig.");
 //		OutputFileGenerator.renderImage(lexer.toString());
+	
 		OutputFileGenerator.renderHTML(HTML_Generator.creatDoc("Lexer", output));
 	}
 	

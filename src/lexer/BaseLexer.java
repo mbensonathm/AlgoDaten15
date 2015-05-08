@@ -93,18 +93,20 @@ public class BaseLexer implements ILexer {
 						+ "<< in dictionary for class "
 						+ auto.stateToString(auto.getFinalState(lastFinalState));
 				return token;
+			} else{
+				return new TokenTwo(null, -1);
 			}
 
 		}
-		if (lastFinalPosition == -1) {
-			return null;
-			// return new Token(new TrieReference(false, -1, null));
-		}
+//		if (lastFinalPosition == -1) {
+//			return new TokenTwo(null, -2);
+//			// return new Token(new TrieReference(false, -1, null));
+//		}
 		if (auto.isEndofFile(state)) {
-			return null;
+			return new TokenTwo(null, -1);
 			// return new Token(new TrieReference(false, -1, null));
 		}
-		return null;
+		return new TokenTwo(null, -2);
 	}
 	
 	private String bufferToString(StringBuffer b, int lastFinalPosition){

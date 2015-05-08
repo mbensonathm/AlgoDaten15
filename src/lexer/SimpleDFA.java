@@ -37,7 +37,10 @@ public class SimpleDFA implements IDFA {
 			if (Character.isWhitespace(symbol)) {
 				return WS_STATE;
 			}
-			if (Pattern.matches("\\p{Punct}", Character.toString(Character.toChars(symbol)[0]))) {
+//			if (Pattern.matches("\\p{Punct}", Character.toString(Character.toChars(symbol)[0]))) {
+//				return PM_STATE;
+//			}
+			if (symbol == 33 || symbol == 46 || symbol == 44 || symbol == 59 || symbol == 63){
 				return PM_STATE;
 			}
 			if (Character.isLetter(symbol)) {

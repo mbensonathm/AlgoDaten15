@@ -9,7 +9,9 @@ public class TokenTwo implements IToken {
 
 	public TokenTwo(ITrieReference ref, int classCode){
 		this.classCode = classCode;
-		this.relativeCode = (Integer) ref.getValue();
+		if (ref != null){
+			this.relativeCode = (Integer) ref.getValue();
+		}
 	}
 	
 	@Override
