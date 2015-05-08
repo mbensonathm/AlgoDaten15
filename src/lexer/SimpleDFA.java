@@ -7,9 +7,9 @@ public class SimpleDFA implements IDFA {
 	private final int START_STATE = 0;
 	private final int FAILURE_STATE = 100;
 	private final int EOF_STATE = 101;
-	private final int ID_STATE = ID;
-	private final int PM_STATE = PM;
-	private final int WS_STATE = WS;
+	private final int ID_STATE = 150;
+	private final int PM_STATE = 151;
+	private final int WS_STATE = 152;
 	private final int FIRST_OF_DAY_STATE = 10;
 	private final int SECOND_OF_DAY_STATE = 11;
 	private final int DAY_STATE = 12;
@@ -17,8 +17,8 @@ public class SimpleDFA implements IDFA {
 	private final int SECOND_OF_MONTH_STATE = 14;
 	private final int MONTH_STATE = 15;
 	private final int FIRST_OF_YEAR_STATE = 16;
-	private final int DATE_STATE = DATE;
-	private final int INTCONS_STATE = INTCON;
+	private final int DATE_STATE = 153;
+	private final int INTCONS_STATE = 154;
 
 	@Override
 	public int getInitial() {
@@ -174,14 +174,14 @@ public class SimpleDFA implements IDFA {
 	}
 
 	@Override
-	public int getFinalState(int state) {
+	public int getClassFromFinalState(int state) {
 		switch (state){
-		case ID_STATE: return ID_STATE;
-		case WS_STATE: return WS_STATE;
-		case PM_STATE: return PM_STATE;
-		case FIRST_OF_DAY_STATE: return INTCONS_STATE;
-		case SECOND_OF_DAY_STATE: return INTCONS_STATE;
-		case DATE_STATE: return DATE_STATE;
+		case ID_STATE: return this.ID;
+		case WS_STATE: return this.WS;
+		case PM_STATE: return this.PM;
+		case FIRST_OF_DAY_STATE: return this.INTCON;
+		case SECOND_OF_DAY_STATE: return this.INTCON;
+		case DATE_STATE: return this.DATE;
 		default: return -1;
 		}
 	}

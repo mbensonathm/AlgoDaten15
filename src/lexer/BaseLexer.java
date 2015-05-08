@@ -4,15 +4,17 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.PushbackReader;
 import java.util.HashMap;
+
 import output.HTML_Generator;
 import mapPackage.TreeMapFactory;
+import token.ITokenCodes;
 import token.TokenTwo;
 import actionsPackage.StringCoding;
 import token.IToken;
 import triePackage.ITrie;
 import triePackage.Trie;
 
-public class BaseLexer implements ILexer {
+public class BaseLexer implements ILexer, ITokenCodes {
 	private PushbackReader reader;
 	private IDFA auto;
 	// private ITrie trie;
@@ -24,7 +26,7 @@ public class BaseLexer implements ILexer {
 	public BaseLexer(Reader r, IDFA auto) {
 		this.reader = new PushbackReader(r, 1024);
 		this.auto = auto;
-		initiateTries(auto.codesForTries());
+		initiateTries(this.DATE, this.ID, this.INTCON, this.PM, this.WS);
 	}
 
 	@Override
@@ -76,13 +78,13 @@ public class BaseLexer implements ILexer {
 
 		// Save final state token to correct trie
 		if (lastFinalPosition > -1) {
-			ITrie trie = tries.get(auto.getFinalState(lastFinalState));
+			ITrie trie = tries.get(auto.getClassFromFinalState(lastFinalState));
 			char[] chars = tokenBuffer.substring(lastFinalPosition)
 					.toCharArray();
 			reader.unread(chars);
 			if (trie != null) {
 				IToken token = new TokenTwo(trie.insert(tokenBuffer.substring(
-						0, lastFinalPosition)), lastFinalState);
+						0, lastFinalPosition)), auto.getClassFromFinalState(lastFinalState));
 				output += "GetNextToken returns. >>"
 						+ tokenBuffer.substring(0, lastFinalPosition)
 						+ "<< => Token ("
@@ -91,7 +93,7 @@ public class BaseLexer implements ILexer {
 						+ "result of decode      >>"
 						+ tokenBuffer.substring(0, lastFinalPosition)
 						+ "<< in dictionary for class "
-						+ auto.stateToString(auto.getFinalState(lastFinalState));
+						+ classToString(auto.getClassFromFinalState(lastFinalState));
 				return token;
 			} else{
 				return new TokenTwo(null, -1);
@@ -141,7 +143,7 @@ public class BaseLexer implements ILexer {
 		return toReturn;
 	}
 
-	private void initiateTries(int[] codes) {
+	private void initiateTries(int... codes) {
 		this.tries = new HashMap<>();
 		for (int i : codes) {
 			this.tries.put(i, new Trie(mapFactory, new StringCoding(4711)));
@@ -156,5 +158,35 @@ public class BaseLexer implements ILexer {
 				+ HTML_Generator.tdTags("Last Final State")
 				+ HTML_Generator.tdTags("L")
 				+ HTML_Generator.tdTags("Buffer=Tokenstring|Remaining"));
+	}
+	
+	@SuppressWarnings("static-access")
+	private String classToString(int c){
+//		switch (c) {
+//		case(this.DATE): return "DATE";
+//		case(this.INTCON): return "INTCON";
+//		case(this.ID): return "ID";
+//		case(this.PM): return "PM";
+//		case(this.WS): return "WS";
+//		default: return "No class";
+//		}
+		if (c == this.WS){
+			return "WS";
+		}
+		if (c == this.DATE){
+			return "DATE";
+		}
+		if (c == this.PM){
+			return "PM";
+		}
+		if (c == this.ID){
+			return "ID";
+		}
+		if (c == this.INTCON){
+			return "INTCON";
+		}
+		else{
+			return "No class";
+		}
 	}
 }

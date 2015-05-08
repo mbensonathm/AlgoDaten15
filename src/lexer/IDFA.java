@@ -13,5 +13,5 @@ public interface IDFA extends ITokenCodes {
 	String stateToString(int state);
 	boolean isEndofFile(int state);
 	int[] codesForTries();
-	int getFinalState(int state);
+	public int getClassFromFinalState(int state);
 }
