@@ -1,6 +1,7 @@
 package lexer;
 
 import java.util.Set;
+import java.util.function.IntConsumer;
 import java.util.regex.Pattern;
 
 public class SimpleDFA implements IDFA {
@@ -116,6 +117,13 @@ public class SimpleDFA implements IDFA {
 			} else {
 				return FAILURE_STATE;
 			}
+		case INTCONS_STATE: {
+			if (Character.isDigit(symbol)) {
+				return INTCONS_STATE;
+			} else {
+				return FAILURE_STATE;
+			}
+		}
 		default:
 			return FAILURE_STATE;
 		}

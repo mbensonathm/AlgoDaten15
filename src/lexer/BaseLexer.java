@@ -23,6 +23,7 @@ public class BaseLexer implements ILexer, ITokenCodes {
 	private TreeMapFactory mapFactory = new TreeMapFactory();
 	private String output;
 
+	@SuppressWarnings("static-access")
 	public BaseLexer(Reader r, IDFA auto) {
 		this.reader = new PushbackReader(r, 1024);
 		this.auto = auto;
@@ -100,13 +101,8 @@ public class BaseLexer implements ILexer, ITokenCodes {
 			}
 
 		}
-//		if (lastFinalPosition == -1) {
-//			return new TokenTwo(null, -2);
-//			// return new Token(new TrieReference(false, -1, null));
-//		}
 		if (auto.isEndofFile(state)) {
 			return new TokenTwo(null, -1);
-			// return new Token(new TrieReference(false, -1, null));
 		}
 		return new TokenTwo(null, -2);
 	}
@@ -162,14 +158,6 @@ public class BaseLexer implements ILexer, ITokenCodes {
 	
 	@SuppressWarnings("static-access")
 	private String classToString(int c){
-//		switch (c) {
-//		case(this.DATE): return "DATE";
-//		case(this.INTCON): return "INTCON";
-//		case(this.ID): return "ID";
-//		case(this.PM): return "PM";
-//		case(this.WS): return "WS";
-//		default: return "No class";
-//		}
 		if (c == this.WS){
 			return "WS";
 		}
