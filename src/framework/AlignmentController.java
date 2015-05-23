@@ -32,7 +32,7 @@ public class AlignmentController {
 //		ILexer lexer = new SimpleLexer(inputOriginal);
 		
 		// Lexer stuff
-		ILexer lexer = new AdvancedLexer(readerOriginal, new SimpleDFA());
+		ILexer lexer = new FilterLexer(new AdvancedLexer(readerOriginal, new SimpleDFA()));
 		int callCounter = 1;
 		IToken token = lexer.getNextToken();
 		generateHTMLForEntry(lexer.getOutput(), callCounter);
