@@ -14,17 +14,14 @@ import token.IToken;
 import triePackage.ITrie;
 import triePackage.Trie;
 
-public class BaseLexer implements ILexer, IClassCodes {
+public class AdvancedLexer implements ILexer, IClassCodes {
 	private PushbackReader reader;
 	private IDFA auto;
-	// private ITrie trie;
 	private HashMap<Integer, ITrie> tries;
-	// private IActionAtInsert action = new StringCoding(4711);
 	private TreeMapFactory mapFactory = new TreeMapFactory();
 	private String output;
 
-	@SuppressWarnings("static-access")
-	public BaseLexer(Reader r, IDFA auto) {
+	public AdvancedLexer(Reader r, IDFA auto) {
 		this.reader = new PushbackReader(r, 1024);
 		this.auto = auto;
 		initiateTries(auto.codesForTries());
@@ -122,7 +119,13 @@ public class BaseLexer implements ILexer, IClassCodes {
 
 	@Override
 	public String decode(IToken token) {
-		return token.toString();
+		ITrie trie = tries.get(token.getClassCode());
+		if (trie != null){
+			return trie.getClearText().get(token.getRelativeCode());	
+		} else{
+			return "No entry found.";
+		}
+		
 	}
 
 	@Override
@@ -156,31 +159,38 @@ public class BaseLexer implements ILexer, IClassCodes {
 				+ HTML_Generator.tdTags("Buffer=Tokenstring|Remaining"));
 	}
 	
-	@SuppressWarnings("static-access")
+	public String dictionariesToString(){
+		StringBuffer sb = new StringBuffer();
+		for (ITrie trie: tries.values()){
+			if (!trie.getClearText().isEmpty()){
+				sb.append(trie.getClearText().toString() + "\n");
+			}
+		}
+		return sb.toString();
+	}
+	
 	private String classToString(int c){
-		if (c == this.WS){
+		if (c == IClassCodes.WS){
 			return "WS";
 		}
-		if (c == this.DATE){
+		if (c == IClassCodes.DATE){
 			return "DATE";
 		}
-		if (c == this.PM){
+		if (c == IClassCodes.PM){
 			return "PM";
 		}
-		if (c == this.ID){
+		if (c == IClassCodes.ID){
 			return "ID";
 		}
-		if (c == this.INTCON){
+		if (c == IClassCodes.INTCON){
 			return "INTCON";
+		}
+		if (c == IClassCodes.DEFAULT){
+			return "DEFAULT";
 		}
 		else{
 			return "No class";
 		}
 	}
-
-	@Override
-	public String dictionariesToString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
+

@@ -4,6 +4,8 @@ import java.util.Set;
 import java.util.function.IntConsumer;
 import java.util.regex.Pattern;
 
+import token.IClassCodes;
+
 public class SimpleDFA implements IDFA {
 	private final int START_STATE = 0;
 	private final int FAILURE_STATE = 100;
@@ -20,6 +22,7 @@ public class SimpleDFA implements IDFA {
 	private final int FIRST_OF_YEAR_STATE = 16;
 	private final int DATE_STATE = 153;
 	private final int INTCONS_STATE = 154;
+	private final int DEFAULT_STATE = 155;
 
 	@Override
 	public int getInitial() {
@@ -27,7 +30,7 @@ public class SimpleDFA implements IDFA {
 	}
 	
 	public int[] codesForTries(){
-		return new int[]{ID, PM, WS, DATE, INTCON};
+		return new int[]{ID, PM, WS, DATE, INTCON, DEFAULT};
 	}
 
 	@Override
@@ -38,12 +41,12 @@ public class SimpleDFA implements IDFA {
 			if (Character.isWhitespace(symbol)) {
 				return WS_STATE;
 			}
-//			if (Pattern.matches("\\p{Punct}", Character.toString(Character.toChars(symbol)[0]))) {
-//				return PM_STATE;
-//			}
-			if (symbol == 33 || symbol == 46 || symbol == 44 || symbol == 59 || symbol == 63){
+			if (Pattern.matches("\\p{Punct}", Character.toString(Character.toChars(symbol)[0]))) {
 				return PM_STATE;
 			}
+//			if (symbol == 33 || symbol == 46 || symbol == 44 || symbol == 59 || symbol == 63){
+//				return PM_STATE;
+//			}
 			if (Character.isLetter(symbol)) {
 				return ID_STATE;
 			}
@@ -56,7 +59,7 @@ public class SimpleDFA implements IDFA {
 			if (Character.isDigit(symbol)) {
 				return FIRST_OF_DAY_STATE;
 			} else {
-				return FAILURE_STATE;
+				return DEFAULT_STATE;
 			}
 		case ID_STATE:
 			if (Character.isLetter(symbol)) {
@@ -124,6 +127,16 @@ public class SimpleDFA implements IDFA {
 				return FAILURE_STATE;
 			}
 		}
+		case DEFAULT_STATE: {
+			if (Pattern.matches("\\p{Punct}", Character.toString(Character.toChars(symbol)[0]))){
+				return DEFAULT_STATE;
+			}
+			if (Character.isWhitespace(symbol)){
+				return DEFAULT_STATE;
+			} else {
+				return FAILURE_STATE;
+			}
+		}
 		default:
 			return FAILURE_STATE;
 		}
@@ -169,6 +182,7 @@ public class SimpleDFA implements IDFA {
 		case (FIRST_OF_YEAR_STATE): return "FIRST_OF_YEAR_STATE"; 
 		case (INTCONS_STATE): return "INTCONS_STATE";
 		case (DATE_STATE): return "DATE_STATE"; 
+		case DEFAULT_STATE: return "DEFAULT_STATE";
 		default: return "--";
 		}
 	}
@@ -184,12 +198,13 @@ public class SimpleDFA implements IDFA {
 	@Override
 	public int getClassFromFinalState(int state) {
 		switch (state){
-		case ID_STATE: return this.ID;
-		case WS_STATE: return this.WS;
-		case PM_STATE: return this.PM;
-		case FIRST_OF_DAY_STATE: return this.INTCON;
-		case SECOND_OF_DAY_STATE: return this.INTCON;
-		case DATE_STATE: return this.DATE;
+		case ID_STATE: return IClassCodes.ID;
+		case WS_STATE: return IClassCodes.WS;
+		case PM_STATE: return IClassCodes.PM;
+		case FIRST_OF_DAY_STATE: return IClassCodes.INTCON;
+		case SECOND_OF_DAY_STATE: return IClassCodes.INTCON;
+		case DATE_STATE: return IClassCodes.DATE;
+		case INTCONS_STATE: return IClassCodes.INTCON;
 		default: return -1;
 		}
 	}

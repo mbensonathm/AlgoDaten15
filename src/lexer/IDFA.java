@@ -1,9 +1,9 @@
 package lexer;
 
 import java.util.Set;
-import token.ITokenCodes;
+import token.IClassCodes;
 
-public interface IDFA extends ITokenCodes {
+public interface IDFA extends IClassCodes {
 	
 	int getInitial();
 	int trans(int state, int symbol);

@@ -1,7 +1,9 @@
 package triePackage;
 
 import java.util.Iterator;
+import java.util.TreeMap;
 
+import token.IToken;
 import actionsPackage.IActionAtInsert;
 
 /**
@@ -19,5 +21,7 @@ public interface ITrie {
 	public ITrieReference lookup(Iterator iterator);
 	
 	public ITrieReference lookup(String string);
+	
+	TreeMap<Integer, String> getClearText();
 
 }

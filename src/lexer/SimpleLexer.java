@@ -73,6 +73,12 @@ public class SimpleLexer implements ILexer{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String dictionariesToString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

@@ -1,7 +1,9 @@
 package triePackage;
 
 import java.util.Iterator;
+import java.util.TreeMap;
 
+import token.IToken;
 import mapPackage.IMapFactory;
 import actionsPackage.IActionAtInsert;
 
@@ -9,6 +11,7 @@ public class Trie implements ITrie {
 
 	private ITrieNode root;
 	private IActionAtInsert action;
+	private TreeMap<Integer, String> clearText = new TreeMap<Integer, String>();
 
 	public Trie(IMapFactory mapFactory, IActionAtInsert action) {
 		this.root = new TrieNode(mapFactory, null, null);
@@ -17,7 +20,14 @@ public class Trie implements ITrie {
 
 	@Override
 	public ITrieReference insert(String string) {
-		return root.recursivInsert(string, action);
+		ITrieReference ref = root.recursivInsert(string, action);
+		try{
+			clearText.put((Integer) ref.getValue(), string);
+		} catch (Exception e)
+		{
+			// Exception not handled.
+		}
+		return ref;
 	}
 
 	@Override
@@ -37,5 +47,10 @@ public class Trie implements ITrie {
 
 	public String toString() {
 		return root.toString();
+	}
+
+	@Override
+	public TreeMap<Integer, String> getClearText() {
+		return this.clearText;
 	}
 }

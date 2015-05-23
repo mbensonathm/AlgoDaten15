@@ -32,7 +32,7 @@ public class AlignmentController {
 //		ILexer lexer = new SimpleLexer(inputOriginal);
 		
 		// Lexer stuff
-		ILexer lexer = new BaseLexer(readerOriginal, new SimpleDFA());
+		ILexer lexer = new AdvancedLexer(readerOriginal, new SimpleDFA());
 		int callCounter = 1;
 		IToken token = lexer.getNextToken();
 		generateHTMLForEntry(lexer.getOutput(), callCounter);
@@ -42,6 +42,7 @@ public class AlignmentController {
 			token = lexer.getNextToken();
 			generateHTMLForEntry(lexer.getOutput(), callCounter);
 		}
+		System.out.println(lexer.dictionariesToString());
 		if (token.getClassCode() == -1){
 			output += HTML_Generator.divTags("First (original) reading loop finished.");
 		}
