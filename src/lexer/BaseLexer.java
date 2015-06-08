@@ -183,4 +183,10 @@ public class BaseLexer implements ILexer, IClassCodes {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void setPushbackReader(Reader r) {
+		// TODO Auto-generated method stub
+		
+	}
 }

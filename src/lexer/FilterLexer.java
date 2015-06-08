@@ -1,6 +1,7 @@
 package lexer;
 
 import java.io.IOException;
+import java.io.Reader;
 
 import token.IClassCodes;
 import token.IToken;
@@ -35,6 +36,12 @@ public class FilterLexer implements ILexer, IClassCodes {
 	@Override
 	public String dictionariesToString() {
 		return coreLexer.dictionariesToString();
+	}
+
+	@Override
+	public void setPushbackReader(Reader r) {
+		coreLexer.setPushbackReader(r);
+		
 	}
 
 }

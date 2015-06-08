@@ -2,6 +2,7 @@ package lexer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.StringTokenizer;
 
 import mapPackage.IMapFactory;
@@ -78,6 +79,12 @@ public class SimpleLexer implements ILexer{
 	public String dictionariesToString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setPushbackReader(Reader r) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

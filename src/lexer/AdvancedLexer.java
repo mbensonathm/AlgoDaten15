@@ -192,5 +192,10 @@ public class AdvancedLexer implements ILexer, IClassCodes {
 			return "No class";
 		}
 	}
+
+	@Override
+	public void setPushbackReader(Reader r) {
+		this.reader = new PushbackReader(r, 1024);
+	}
 }
 
