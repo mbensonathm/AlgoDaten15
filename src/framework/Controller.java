@@ -8,12 +8,18 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 
+import Aligment.AlignmentControl;
+import token.ITokenSequence;
+import token.TokenSequence;
+
 public class Controller {
 
 	Controller (String o, String s) throws IOException{
 		PushbackReader readerOriginal = initiateReader(o);
 		PushbackReader readerSuspect = initiateReader(s);
-		AlignmentControl alCtrl = new AlignmentControl(readerOriginal, readerSuspect);
+		ITokenSequence tko = new TokenSequence();
+		ITokenSequence tks = new TokenSequence();
+		AlignmentControl alCtrl = new AlignmentControl(readerOriginal, readerSuspect, tko, tks);
 		alCtrl.run();
 		// Selector
 		// Scoring

@@ -1,4 +1,4 @@
-package framework;
+package Aligment;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,27 +6,32 @@ import java.io.PushbackReader;
 
 import output.*;
 import token.IToken;
+import token.ITokenSequence;
 import lexer.*;
 
 public class AlignmentControl {
 	private PushbackReader readerOriginal;
 	private PushbackReader readerSuspect;
+	private ITokenSequence seqOriginal;
+	private ITokenSequence seqSuspect;
 	private String output = "";
 
-	public AlignmentControl(PushbackReader o, PushbackReader s) {
+	public AlignmentControl(PushbackReader o, PushbackReader s, ITokenSequence tko, ITokenSequence tks) {
 		this.readerOriginal = o;
 		this.readerSuspect = s;
+		this.seqOriginal = tko;
+		this.seqSuspect = tks;
 	}
 	
 	public void run() throws FileNotFoundException, IOException{		
 		// Lexer stuff
 		ILexer lexer = new FilterLexer(new AdvancedLexer(new SimpleDFA()));
 		lexer.setPushbackReader(this.readerOriginal);
-		int scanResultOriginal = scanText(lexer);
+		int scanResultOriginal = scanText(lexer, seqOriginal);
 		if (scanResultOriginal == -1){
 			output += HTML_Generator.divTags("First (original) reading loop finished.");
 			lexer.setPushbackReader(this.readerSuspect);
-			int scanResultSuspect = scanText(lexer);
+			int scanResultSuspect = scanText(lexer, seqSuspect);
 			if (scanResultSuspect == -1){
 				output += HTML_Generator.divTags("Second (suspect) reading loop finished.");
 			}
@@ -50,14 +55,16 @@ public class AlignmentControl {
 	 * @return
 	 * @throws IOException
 	 */
-	private int scanText(ILexer lexer) throws IOException{
+	private int scanText(ILexer lexer, ITokenSequence tk) throws IOException{
 		int callCounter = 1;
 		IToken token = lexer.getNextToken();
+		tk.add(token);
 		generateHTMLForEntry(lexer.getOutput(), callCounter);
 		while(token.getClassCode() > 0){
 			System.out.println("Gelesen: " + token);
 			callCounter++;
 			token = lexer.getNextToken();
+			tk.add(token);
 			generateHTMLForEntry(lexer.getOutput(), callCounter);
 		}
 		System.out.println(lexer.dictionariesToString());
