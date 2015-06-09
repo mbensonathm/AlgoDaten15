@@ -21,8 +21,7 @@ public class AdvancedLexer implements ILexer, IClassCodes {
 	private TreeMapFactory mapFactory = new TreeMapFactory();
 	private String output;
 
-	public AdvancedLexer(Reader r, IDFA auto) {
-		this.reader = new PushbackReader(r, 1024);
+	public AdvancedLexer(IDFA auto) {
 		this.auto = auto;
 		initiateTries(auto.codesForTries());
 	}
