@@ -25,6 +25,6 @@ public class TokenTwo implements IToken {
 	}
 	
 	public String toString(){
-		return "Class: " + getClassCode() + " Relative: " + getRelativeCode();
+		return "(Class: " + getClassCode() + " Relative: " + getRelativeCode() + ")";
 	}
 }

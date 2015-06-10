@@ -1,4 +1,4 @@
-package Aligment;
+package aligment;
 
 class Region implements IRegion {
 	private int x1;

@@ -1,4 +1,4 @@
-package Aligment;
+package aligment;
 
 public interface IRegion {
 

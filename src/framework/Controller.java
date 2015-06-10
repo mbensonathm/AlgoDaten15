@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PushbackReader;
-import java.io.Reader;
 
-import Aligment.AlignmentControl;
-import token.ITokenSequence;
-import token.TokenSequence;
+import matrix.*;
+import output.IPresenter;
+import output.Presenter;
+import aligment.*;
+import scoring.*;
+import token.*;
 
 public class Controller {
 
@@ -21,10 +23,14 @@ public class Controller {
 		ITokenSequence tks = new TokenSequence();
 		AlignmentControl alCtrl = new AlignmentControl(readerOriginal, readerSuspect, tko, tks);
 		alCtrl.run();
-		// Selector
-		// scoring
+		ISelector selector = new SimpleSelector(tko, tks);
+		IScoring scoring = new SimpleScoring();
 		// Aligner
-		// Presenter
+		IAlignmentMatrix matrix = new SimpleAlignmentMatrix(tko, tks);
+		IPresenter presenter = new Presenter(tko, tks, alCtrl.getLexer(), 
+											matrix, selector.getRegion(), scoring);
+		
+		System.out.println(presenter.backward());
 	}
 	
 	/**

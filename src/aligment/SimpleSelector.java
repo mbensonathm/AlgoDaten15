@@ -1,4 +1,4 @@
-package Aligment;
+package aligment;
 
 import token.ITokenSequence;
 
@@ -6,7 +6,7 @@ public class SimpleSelector implements ISelector {
 	private ITokenSequence seqOriginal;
 	private ITokenSequence seqSuspect;
 	
-	SimpleSelector(ITokenSequence tko, ITokenSequence tks){
+	public SimpleSelector(ITokenSequence tko, ITokenSequence tks){
 		this.seqOriginal = tko;
 		this.seqSuspect = tks;
 	}
