@@ -22,7 +22,7 @@ public class Controller {
 		AlignmentControl alCtrl = new AlignmentControl(readerOriginal, readerSuspect, tko, tks);
 		alCtrl.run();
 		// Selector
-		// Scoring
+		// scoring
 		// Aligner
 		// Presenter
 	}
