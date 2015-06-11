@@ -1,4 +1,4 @@
-package src.aligment;
+package aligment;
 
 import matrix.IAlignmentMatrix;
 

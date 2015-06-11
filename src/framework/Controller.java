@@ -25,8 +25,8 @@ public class Controller {
 		alCtrl.run();
 		ISelector selector = new SimpleSelector(tko, tks);
 		IScoring scoring = new SimpleScoring();
-		// Aligner
-		IAlignmentMatrix matrix = new SimpleAlignmentMatrix(tko, tks);
+		IAligner aligner = new Aligner(selector.getRegion(), scoring, tko, tks);
+		IAlignmentMatrix matrix = aligner.forward();
 		IPresenter presenter = new Presenter(tko, tks, alCtrl.getLexer(), 
 											matrix, selector.getRegion(), scoring);
 		
