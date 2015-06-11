@@ -30,7 +30,9 @@ public class Controller {
 		IPresenter presenter = new Presenter(tko, tks, alCtrl.getLexer(), 
 											matrix, selector.getRegion(), scoring);
 		
-		System.out.println(presenter.backward());
+		System.out.println(presenter.threeColumnOutput()[0]);
+		System.out.println(presenter.threeColumnOutput()[1]);
+		System.out.println(presenter.threeColumnOutput()[2]);
 	}
 	
 	/**

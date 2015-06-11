@@ -111,10 +111,10 @@ public class Presenter implements IPresenter {
 				o1 = token1 + " " + o1;
 				o2 = token2 + " " + o2;
 				// Determine consensus
-				if (score.isPerfect(matrix.get(i, j).getValue())){
+				if (score.isPerfect(score.getScore(tko.getToken(i-1), tks.getToken(j-1)))){
 					con = token1 + " " + con;
 				}
-				if (score.isMismatch(matrix.get(i, j).getValue())){
+				if (score.isMismatch(score.getScore(tko.getToken(i-1), tks.getToken(j-1)))){
 					String filler = "";
 					for (int k = 0; k < Math.max(token1.length(), token2.length()); k++){
 						filler += "+";

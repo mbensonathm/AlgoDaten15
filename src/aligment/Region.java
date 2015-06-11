@@ -12,4 +12,17 @@ class Region implements IRegion {
 		this.y1 = y1;
 		this.y2 = y2;				
 	}
+	
+	public int geti1(){
+		return this.x1;
+	}
+	public int geti2(){
+		return this.x2;
+	}
+	public int getj1(){
+		return this.y1;
+	}
+	public int getj2(){
+		return this.y2;
+	}
 }

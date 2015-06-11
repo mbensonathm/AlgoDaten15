@@ -23,24 +23,25 @@ public class Aligner implements IAligner {
 	@Override
 	public IAlignmentMatrix forward() {
 		IAlignmentMatrix matrix = new SimpleAlignmentMatrix(tko, tks, scoring);
-		int m = tko.length();
-		int n = tks.length();
-		int i = 1;
-		int j = 1;
+		//int m = region.geti2() + 1;
+//		int n = region.getj2() + 1;
+		//int i = region.geti1() + 1;
+//		int j = region.getj1() + 1;
 		
-		while (i <= m && j <= n){
-			double vertScore = matrix.get(i-1, j).getValue();
-			double horizScore = matrix.get(i, j-1).getValue();
-			double diaScore = matrix.get(i-1, j-1).getValue() + scoring.getScore(tko.getToken(i-1), tks.getToken(j-1));
-			IAlignmentContent content = new SimpleAlignmentContent(vertScore, Direction.VERTICAL_MOVE);
-			if (horizScore > content.getValue()){
-				content = new SimpleAlignmentContent(horizScore, Direction.HORIZONTAL_MOVE);
+		for(int i = region.geti1() + 1; i <= region.geti2() + 1; i++){
+			for (int j = region.getj1() + 1; j <= region.getj2() + 1; j++){
+				double vertScore = matrix.get(i-1, j).getValue() - scoring.getGapScore();
+				double horizScore = matrix.get(i, j-1).getValue() - scoring.getGapScore();
+				double diaScore = matrix.get(i-1, j-1).getValue() + scoring.getScore(tko.getToken(i-1), tks.getToken(j-1));
+				IAlignmentContent content = new SimpleAlignmentContent(vertScore, Direction.VERTICAL_MOVE);
+				if (horizScore > content.getValue()){
+					content = new SimpleAlignmentContent(horizScore, Direction.HORIZONTAL_MOVE);
+				}
+				if (diaScore > content.getValue()){
+					content = new SimpleAlignmentContent(diaScore, Direction.DIAGONAL_MOVE);
+				}
+				matrix.set(i, j, content);
 			}
-			if (diaScore > content.getValue()){
-				content = new SimpleAlignmentContent(diaScore, Direction.DIAGONAL_MOVE);
-			}
-			i++;
-			j++;
 		}
 		return matrix;
 	}
