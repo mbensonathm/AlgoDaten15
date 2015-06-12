@@ -43,5 +43,9 @@ public class FilterLexer implements ILexer, IClassCodes {
 		coreLexer.setPushbackReader(r);
 		
 	}
+	
+	public String toString(){
+		return coreLexer.toString();
+	}
 
 }
