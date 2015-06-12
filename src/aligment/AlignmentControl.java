@@ -45,7 +45,7 @@ public class AlignmentControl {
 		}
 		// Output stuff
 		System.out.println("Reading complete.");
-//		OutputFileGenerator.renderImage(lexer.toString());
+		OutputFileGenerator.renderImage(lexer.toString());
 		OutputFileGenerator.renderHTML(HTML_Generator.createDoc("Lexer", output));
 	}
 	
