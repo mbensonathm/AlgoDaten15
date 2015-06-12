@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class OutputFileGenerator {
 		
-	public static void renderImage(String dotCode) throws IOException{
+	public static String renderImage(String dotCode) throws IOException{
 		// Write code to text file
 		File temp = File.createTempFile("dotcode", ".txt");
 		FileWriter writer = new FileWriter(temp);
@@ -16,8 +16,9 @@ public class OutputFileGenerator {
 		String filePath = filePathAndName.substring(0,filePathAndName.lastIndexOf(File.separator));
 		String workingDir = System.getProperty("user.dir");
 		// Call Graphviz program with text file
-		Process p = Runtime.getRuntime().exec("\"" + workingDir + "\\src\\output\\bin\\dot.exe\" -o \"" + filePath + "\\graph.gif\" -Tgif " + "\""+filePathAndName + "\"");
-		Process p2 = Runtime.getRuntime().exec("explorer \"" + filePath + "\\graph.gif\"");
+		Runtime.getRuntime().exec("\"" + workingDir + "\\src\\output\\bin\\dot.exe\" -o \"" + filePath + "\\graph.gif\" -Tgif " + "\""+filePathAndName + "\"");
+		return filePath + "\\graph.gif\"";
+//		Process p2 = Runtime.getRuntime().exec("explorer \"" + filePath + "\\graph.gif\"");
 	}
 	public static void renderHTML(String code) throws IOException{
 		// Write code to text file

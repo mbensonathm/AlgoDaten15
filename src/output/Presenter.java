@@ -11,10 +11,12 @@ import token.ITokenSequence;
 public class Presenter implements IPresenter {
 	private ITokenSequence tko;
 	private ITokenSequence tks;
-	ILexer lexer;
-	IAlignmentMatrix matrix;
-	IRegion region;
-	SimpleScoring score;
+	private ILexer lexer;
+	private IAlignmentMatrix matrix;
+	private IRegion region;
+	private SimpleScoring score;
+	private double finalScore;
+	
 
 	public Presenter(ITokenSequence tko, ITokenSequence tks, ILexer lexer,
 			IAlignmentMatrix matrix, IRegion region, IScoring score) {
@@ -98,6 +100,7 @@ public class Presenter implements IPresenter {
 		int i = tko.length()-1;
 		int j = tks.length()-1;
 		while(i > 0 && j > 0){
+			this.finalScore = matrix.get(i, j).getValue();
 			switch (matrix.get(i, j).getDirection()){
 			case DIAGONAL_MOVE:
 				// Get tokens and decode to clear text
@@ -169,5 +172,9 @@ public class Presenter implements IPresenter {
 			}
 		}
 		return new String[]{s1, s2};
+	}
+	
+	public double getFinalScore(){
+		return this.finalScore;
 	}
 }
