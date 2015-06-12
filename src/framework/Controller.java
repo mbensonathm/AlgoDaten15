@@ -8,7 +8,9 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 
 import matrix.*;
+import output.HTML_Generator;
 import output.IPresenter;
+import output.OutputFileGenerator;
 import output.Presenter;
 import aligment.*;
 import scoring.*;
@@ -27,12 +29,16 @@ public class Controller {
 		IScoring scoring = new SimpleScoring();
 		IAligner aligner = new Aligner(selector.getRegion(), scoring, tko, tks);
 		IAlignmentMatrix matrix = aligner.forward();
+		
 		IPresenter presenter = new Presenter(tko, tks, alCtrl.getLexer(), 
 											matrix, selector.getRegion(), scoring);
 		
-		System.out.println(presenter.threeColumnOutput()[0]);
-		System.out.println(presenter.threeColumnOutput()[1]);
-		System.out.println(presenter.threeColumnOutput()[2]);
+		String output = alCtrl.getOutput() + presenter.matrixToString() + HTML_Generator.divTags(presenter.backward()) + HTML_Generator.threeColumns(presenter.threeColumnOutput());
+		OutputFileGenerator.renderHTML(HTML_Generator.createDoc("Plagiarism Check Results", output, alCtrl.getOutputImage()));
+		
+//		System.out.println(presenter.threeColumnOutput()[0]);
+//		System.out.println(presenter.threeColumnOutput()[1]);
+//		System.out.println(presenter.threeColumnOutput()[2]);
 	}
 	
 	/**

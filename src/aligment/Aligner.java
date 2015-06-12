@@ -33,12 +33,12 @@ public class Aligner implements IAligner {
 				double vertScore = matrix.get(i-1, j).getValue() - scoring.getGapScore();
 				double horizScore = matrix.get(i, j-1).getValue() - scoring.getGapScore();
 				double diaScore = matrix.get(i-1, j-1).getValue() + scoring.getScore(tko.getToken(i-1), tks.getToken(j-1));
-				IAlignmentContent content = new SimpleAlignmentContent(vertScore, Direction.VERTICAL_MOVE);
+				IAlignmentContent content = new SimpleAlignmentContent(vertScore, Direction.VERT);
 				if (horizScore > content.getValue()){
-					content = new SimpleAlignmentContent(horizScore, Direction.HORIZONTAL_MOVE);
+					content = new SimpleAlignmentContent(horizScore, Direction.HORIZ);
 				}
 				if (diaScore > content.getValue()){
-					content = new SimpleAlignmentContent(diaScore, Direction.DIAGONAL_MOVE);
+					content = new SimpleAlignmentContent(diaScore, Direction.DIA);
 				}
 				matrix.set(i, j, content);
 			}

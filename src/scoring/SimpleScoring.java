@@ -16,11 +16,11 @@ public class SimpleScoring implements IScoring {
 	}
 	
 	public boolean isPerfect(double s){
-		return s == 1.0 ? true : false;
+		return Math.abs(s-1) <= 0.001 ? true : false;
 	}
 	
 	public boolean isMismatch(double s){
-		return s == 0.0 ? true : false;
+		return Math.abs(s) <= 0.001 ? true : false;
 	}
 	
 	public boolean isNearMatch(double s){

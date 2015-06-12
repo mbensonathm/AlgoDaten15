@@ -15,6 +15,7 @@ public class AlignmentControl {
 	private ITokenSequence seqOriginal;
 	private ITokenSequence seqSuspect;
 	private String output = "";
+	private String outputImage = "";
 	private ILexer lexer;
 
 	public AlignmentControl(PushbackReader o, PushbackReader s, ITokenSequence tko, ITokenSequence tks) {
@@ -45,7 +46,8 @@ public class AlignmentControl {
 		}
 		// Output stuff
 		System.out.println("Reading complete.");
-		OutputFileGenerator.renderHTML(HTML_Generator.createDoc("Lexer", output, OutputFileGenerator.renderImage(lexer.toString())));
+//		OutputFileGenerator.renderHTML(HTML_Generator.createDoc("Lexer", output, OutputFileGenerator.renderImage(lexer.toString())));
+		outputImage = OutputFileGenerator.renderImage(lexer.toString());
 	}
 	
 	/**
@@ -79,5 +81,13 @@ public class AlignmentControl {
 	
 	public ILexer getLexer(){
 		return this.lexer;
+	}
+	
+	public String getOutput(){
+		return this.output;
+	}
+	
+	public String getOutputImage(){
+		return this.outputImage;
 	}
 }

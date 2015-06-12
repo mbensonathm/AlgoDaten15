@@ -37,7 +37,7 @@ public class Presenter implements IPresenter {
 		int j = tks.length()-1;
 		while (i > 0 && j> 0){
 			switch (matrix.get(i, j).getDirection()){
-			case DIAGONAL_MOVE:
+			case DIA:
 				// Get Tokens
 				String t1 = tko.getToken(i-1).toString();
 				String t2 = tks.getToken(j-1).toString();
@@ -49,10 +49,10 @@ public class Presenter implements IPresenter {
 				o1 = t1 + " " + o1;
 				o2 = t2 + " " + o2;
 				// Determine consensus
-				if (score.isPerfect(matrix.get(i, j).getValue())){
+				if (score.isPerfect(score.getScore(tko.getToken(i-1), tks.getToken(j-1)))){
 					con = t1 + " " + con;
 				}
-				if (score.isMismatch(matrix.get(i, j).getValue())){
+				if (score.isMismatch(score.getScore(tko.getToken(i-1), tks.getToken(j-1)))){
 					String filler = "";
 					for (int k = 0; k < Math.max(t1.length(), t2.length()); k++){
 						filler += "+";
@@ -62,7 +62,7 @@ public class Presenter implements IPresenter {
 				i = i-1;
 				j = j-1;
 				break;
-			case HORIZONTAL_MOVE:
+			case HORIZ:
 				t2 = tks.getToken(j-1).toString();
 				o2 = t2 + o2;
 				String filler = "";
@@ -73,7 +73,7 @@ public class Presenter implements IPresenter {
 				con = filler + " " + con;
 				j = j-1;
 				break;
-			case VERTICAL_MOVE:
+			case VERT:
 				t1 = tko.getToken(i-1).toString();
 				o1 = t1 + " " + o1;
 				filler = "";
@@ -88,7 +88,7 @@ public class Presenter implements IPresenter {
 				break;
 			}
 		}
-		return o1.toString() + "\n" + con.toString() + "\n" + o2.toString();
+		return o1.toString() + "<br/>" + con.toString() + "<br />" + o2.toString();
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class Presenter implements IPresenter {
 		while(i > 0 && j > 0){
 			this.finalScore = matrix.get(i, j).getValue();
 			switch (matrix.get(i, j).getDirection()){
-			case DIAGONAL_MOVE:
+			case DIA:
 				// Get tokens and decode to clear text
 				String token1 = this.lexer.decode(tko.getToken(i-1));
 				String token2 = this.lexer.decode(tks.getToken(j-1));
@@ -127,7 +127,7 @@ public class Presenter implements IPresenter {
 				i = i-1;
 				j = j-1;
 				break;
-			case HORIZONTAL_MOVE:
+			case HORIZ:
 				token2 = this.lexer.decode(tks.getToken(j-1));
 				o2 = token2 + " " + o2;
 				String filler = "";
@@ -138,7 +138,7 @@ public class Presenter implements IPresenter {
 				con = filler + " " + con;
 				j = j-1;
 				break;
-			case VERTICAL_MOVE:
+			case VERT:
 				token1 = this.lexer.decode(tko.getToken(i-1));
 				o1 = token1 + " " + o1;
 				filler = "";
@@ -177,4 +177,34 @@ public class Presenter implements IPresenter {
 	public double getFinalScore(){
 		return this.finalScore;
 	}
+	
+	public String matrixToString(){
+		String s = "";
+		String s1 = "<td></td><td></td>";
+		for (int l = 0; l < tks.length(); l++){
+			s1 += HTML_Generator.tdTags(lexer.decode(tks.getToken(l)));
+		}
+		s += HTML_Generator.trTags(s1);
+		for (int i = 0; i <= this.tko.length(); i++){
+			s1 = "";
+			if (i < tko.length() && i > 0){
+				s1 += HTML_Generator.tdTags(lexer.decode(tko.getToken(i-1)));
+			}
+			else{
+				s1 += "<td></td>";
+			}
+			for (int j = 0; j <= this.tks.length(); j++){
+				s1 += HTML_Generator.tdTags(matrix.get(i, j).getValue() + " " + matrix.get(i,j).getDirection());
+			}
+			s += HTML_Generator.trTags(s1);
+		}
+		return HTML_Generator.tableTags(s);
+	}
+	
+//	private String columnWidth(String s){
+//		while(){
+//			s.substring(, endIndex)
+//			
+//		}
+//	}
 }
