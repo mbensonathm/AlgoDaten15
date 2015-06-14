@@ -187,7 +187,7 @@ public class Presenter implements IPresenter {
 		s += HTML_Generator.trTags(s1);
 		for (int i = 0; i <= this.tko.length(); i++){
 			s1 = "";
-			if (i < tko.length() && i > 0){
+			if (i <= tko.length() && i > 0){
 				s1 += HTML_Generator.tdTags(lexer.decode(tko.getToken(i-1)));
 			}
 			else{

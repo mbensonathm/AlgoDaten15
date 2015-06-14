@@ -60,14 +60,14 @@ public class AlignmentControl {
 	private int scanText(ITokenSequence tk) throws IOException{
 		int callCounter = 1;
 		IToken token = lexer.getNextToken();
-		tk.add(token);
-		generateHTMLForEntry(lexer.getOutput(), callCounter);
 		while(token.getClassCode() > 0){
+			tk.add(token);
+			generateHTMLForEntry(lexer.getOutput(), callCounter);
 			System.out.println("Gelesen: " + token);
 			callCounter++;
 			token = lexer.getNextToken();
-			tk.add(token);
-			generateHTMLForEntry(lexer.getOutput(), callCounter);
+//			tk.add(token);
+//			generateHTMLForEntry(lexer.getOutput(), callCounter);
 		}
 		System.out.println(lexer.dictionariesToString());
 		return token.getClassCode();
