@@ -33,7 +33,16 @@ public class Controller {
 		IPresenter presenter = new Presenter(tko, tks, alCtrl.getLexer(), 
 											matrix, selector.getRegion(), scoring);
 		
-		String output = alCtrl.getOutput() + "<h3 id=\"Matrix\">Matrix</h3>" + presenter.matrixToString() + "<h3 id=\"LineOutput\">Three Line Output</h3>" + HTML_Generator.divTags(presenter.backward()) + HTML_Generator.threeColumns(presenter.threeColumnOutput());
+		// HTML for tokens
+		String output = alCtrl.getOutput();
+		// HTML for Scoring
+		output += "<h3 id=\"Scoring\">Scoring</h3>" + scoring.toString();
+		// HTML for Matrix
+		output += "<h3 id=\"Matrix\">Matrix</h3>" + presenter.matrixToString();
+		// HTML for 3 Line
+		output += "<h3 id=\"LineOutput\">Three Line Output</h3>" + HTML_Generator.divTags(presenter.backward());
+		// HTML for 3 column
+		output += HTML_Generator.threeColumns(presenter.threeColumnOutput());
 		OutputFileGenerator.renderHTML(HTML_Generator.createDoc("Plagiarism Check Results", output, alCtrl.getOutputImage()));
 		
 //		System.out.println(presenter.threeColumnOutput()[0]);
