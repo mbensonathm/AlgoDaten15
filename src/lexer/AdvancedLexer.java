@@ -135,7 +135,9 @@ public class AdvancedLexer implements ILexer, IClassCodes {
 	public String toString() {
 		String toReturn = "digraph G { \n node [shape = circle, style = filled, color=red];\n";
 		for (ITrie trie : tries.values()) {
-			toReturn += (trie.toString() + "\n");
+			if (!trie.isEmpty()){
+				toReturn += (trie.toString() + "\n");
+			}
 		}
 		toReturn += "}";
 		return toReturn;

@@ -23,5 +23,7 @@ public interface ITrie {
 	public ITrieReference lookup(String string);
 	
 	TreeMap<Integer, String> getClearText();
+	
+	boolean isEmpty();
 
 }

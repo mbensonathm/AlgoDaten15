@@ -2,22 +2,23 @@ package triePackage;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 
 import mapPackage.IMapFactory;
 import actionsPackage.IActionAtInsert;
 
 public class TrieNode implements ITrieNode{
-	final private Map<Comparable, ITrieNode> outgoingEdgeMap;
+	final private TreeMap<Comparable, ITrieNode> outgoingEdgeMap;
 	final private ITrieNode parent;
-	final private Comparable incomingPartialKey;
+	final private Comparable<Character> incomingPartialKey;
 	final private IMapFactory mapFactory;
 	private Object value;
 	
-	public TrieNode(IMapFactory mapFactory, ITrieNode parent, Comparable incomingPartialKey){
+	public TrieNode(IMapFactory mapFactory, ITrieNode parent, Comparable<Character> incomingPartialKey){
 		this.mapFactory = mapFactory;
 		this.parent = parent;
 		this.incomingPartialKey = incomingPartialKey;
-		this.outgoingEdgeMap = this.mapFactory.create();
+		this.outgoingEdgeMap = (TreeMap<Comparable, ITrieNode>) this.mapFactory.create();
 	}
 	@Override
 	public ITrieReference recursivInsert(Iterator<Comparable> iterator, IActionAtInsert actionAtInsert) {
@@ -31,7 +32,7 @@ public class TrieNode implements ITrieNode{
 			return new TrieReference(true, value, this);
 		}
 		else {
-			Comparable nextPartialKey = iterator.next();
+			Comparable<Character> nextPartialKey = iterator.next();
 			ITrieNode next = outgoingEdgeMap.get(nextPartialKey);
 			if (next == null){
 				outgoingEdgeMap.put(nextPartialKey, new TrieNode(this.mapFactory, this, nextPartialKey));
@@ -52,7 +53,7 @@ public class TrieNode implements ITrieNode{
 			return new TrieReference(true, value, this);
 		}
 		else{
-			Comparable nextPartialKey = s.charAt(0);
+			Comparable<Character> nextPartialKey = s.charAt(0);
 			ITrieNode next = outgoingEdgeMap.get(nextPartialKey);
 			if (next == null){
 				outgoingEdgeMap.put(nextPartialKey, new TrieNode(this.mapFactory, this, nextPartialKey));
@@ -77,8 +78,12 @@ public class TrieNode implements ITrieNode{
 		return sb.toString();
 	}
 	@Override
-	public Comparable getIncomingEdge() {
+	public Comparable<Character> getIncomingEdge() {
 		return this.incomingPartialKey;
+	}
+	
+	public boolean isEmpty(){
+		return outgoingEdgeMap.isEmpty();
 	}
 
 }

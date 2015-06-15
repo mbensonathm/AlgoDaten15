@@ -3,8 +3,8 @@ package output;
 public class HTML_Generator {
 	
 	public static String createDoc(String title, String content, String imagePath){
-		String image = "<IMG SRC=\"file://" + imagePath +" ALT=\"Tries\">\n";
-		return "<!DOCTYPE html>\n<html>\n<head>\n<title>" + title + "</title>\n<STYLE type=\"text/css\">div.seq{font-family: Consolas; margin: 10px; display: block; clear: right; background-color:#f0f0f0; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px;}\n span{font-family: Consolas; width: 100px; background-color:#f0f0f0;}</STYLE></head>\n<body>" + image + content + "</body></html>";
+		String image = "<IMG SRC=\"file://" + imagePath +" ALT=\"Tries\" width=\"100%\" height=\"100%\">\n";
+		return "<!DOCTYPE html>\n<html>\n<head>\n<title>" + title + "</title>\n<meta charset='utf-8'>\n<STYLE type=\"text/css\">div.seq{font-family: Consolas; margin: 10px; display: block; clear: right; background-color:#f0f0f0; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px;}\n span{font-family: Consolas; width: 100px; background-color:#f0f0f0;}</STYLE></head>\n<body>" + image + content + "</body></html>";
 	}
 	
 	public static String divTags(String content){

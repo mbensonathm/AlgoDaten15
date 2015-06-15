@@ -33,8 +33,8 @@ public class Presenter implements IPresenter {
 		String o1 = "";
 		String con = "";
 		String o2 = "";
-		int i = tko.length()-1;
-		int j = tks.length()-1;
+		int i = tko.length();
+		int j = tks.length();
 		while (i > 0 && j> 0){
 			switch (matrix.get(i, j).getDirection()){
 			case DIA:
@@ -64,7 +64,7 @@ public class Presenter implements IPresenter {
 				break;
 			case HORIZ:
 				t2 = tks.getToken(j-1).toString();
-				o2 = t2 + o2;
+				o2 = t2 + " " + o2;
 				String filler = "";
 				for (int k = 0; k < t2.length(); k++){
 					filler += "-";
@@ -97,8 +97,8 @@ public class Presenter implements IPresenter {
 		String o1 = "";
 		String con = "";
 		String o2 = "";
-		int i = tko.length()-1;
-		int j = tks.length()-1;
+		int i = tko.length();
+		int j = tks.length();
 		while(i > 0 && j > 0){
 			this.finalScore = matrix.get(i, j).getValue();
 			switch (matrix.get(i, j).getDirection()){

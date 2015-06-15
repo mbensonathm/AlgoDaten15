@@ -53,4 +53,8 @@ public class Trie implements ITrie {
 	public TreeMap<Integer, String> getClearText() {
 		return this.clearText;
 	}
+	
+	public boolean isEmpty(){
+		return root.isEmpty();
+	}
 }

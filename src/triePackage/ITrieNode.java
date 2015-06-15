@@ -11,5 +11,6 @@ public interface ITrieNode {
 	ITrieReference recursivInsert(String s, IActionAtInsert actionAtInsert);
 	
 	Comparable getIncomingEdge();
-
+	
+	boolean isEmpty();
 }
