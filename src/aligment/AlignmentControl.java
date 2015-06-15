@@ -29,10 +29,12 @@ public class AlignmentControl {
 	public void run() throws FileNotFoundException, IOException{		
 		// Lexer stuff
 		lexer.setPushbackReader(this.readerOriginal);
+		output += "<h3 id=\"TokenSequence1\">Token Sequence: Original</h3>";
 		int scanResultOriginal = scanText(seqOriginal);
 		if (scanResultOriginal == -1){
 			output += HTML_Generator.divTags("First (original) reading loop finished.");
 			lexer.setPushbackReader(this.readerSuspect);
+			output += "<h3 id=\"TokenSequence2\">Token Sequence: Suspect</h3>";
 			int scanResultSuspect = scanText(seqSuspect);
 			if (scanResultSuspect == -1){
 				output += HTML_Generator.divTags("Second (suspect) reading loop finished.");
