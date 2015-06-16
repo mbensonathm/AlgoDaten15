@@ -72,7 +72,11 @@ public class TrieNode implements ITrieNode{
 			sb.append(this.hashCode() + " [label=\"\"];");
 		}
 		for (ITrieNode node : outgoingEdgeMap.values()){
-			sb.append(this.hashCode() + " -> " + node.hashCode() + "[label = \"  " + node.getIncomingEdge() + "\"];\n");
+			String label = node.getIncomingEdge().toString();
+			if (label == "\""){
+				label = "\\\"";
+			}
+			sb.append(this.hashCode() + " -> " + node.hashCode() + "[label = \"  " + label + "\"];\n");
 			sb.append(node.toString());
 		}
 		return sb.toString();

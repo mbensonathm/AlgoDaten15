@@ -35,7 +35,7 @@ public class Presenter implements IPresenter {
 		String o2 = "";
 		int i = tko.length();
 		int j = tks.length();
-		while (i > 0 && j> 0){
+		while (i > 0 || j> 0){
 			switch (matrix.get(i, j).getDirection()){
 			case DIA:
 				// Get Tokens
@@ -99,8 +99,8 @@ public class Presenter implements IPresenter {
 		String o2 = "";
 		int i = tko.length();
 		int j = tks.length();
-		while(i > 0 && j > 0){
-			this.finalScore = matrix.get(i, j).getValue();
+		this.finalScore = matrix.get(i, j).getValue();
+		while(i > 0 || j > 0){
 			switch (matrix.get(i, j).getDirection()){
 			case DIA:
 				// Get tokens and decode to clear text
@@ -200,11 +200,4 @@ public class Presenter implements IPresenter {
 		}
 		return HTML_Generator.tableTags(s);
 	}
-	
-//	private String columnWidth(String s){
-//		while(){
-//			s.substring(, endIndex)
-//			
-//		}
-//	}
 }

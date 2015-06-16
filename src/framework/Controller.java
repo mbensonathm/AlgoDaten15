@@ -43,6 +43,7 @@ public class Controller {
 		output += "<h3 id=\"LineOutput\">Three Line Output</h3>" + HTML_Generator.divTags(presenter.backward());
 		// HTML for 3 column
 		output += HTML_Generator.threeColumns(presenter.threeColumnOutput());
+		output += "<h3>FINAL SCORE for this run: " + presenter.getFinalScore() + "</h3>";
 		OutputFileGenerator.renderHTML(HTML_Generator.createDoc("Plagiarism Check Results", output, alCtrl.getOutputImage()));
 		
 //		System.out.println(presenter.threeColumnOutput()[0]);
