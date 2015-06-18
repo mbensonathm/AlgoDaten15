@@ -73,7 +73,7 @@ public class TrieNode implements ITrieNode{
 		}
 		for (ITrieNode node : outgoingEdgeMap.values()){
 			String label = node.getIncomingEdge().toString();
-			if (label == "\""){
+			if (label.codePointAt(0) == 34){
 				label = "\\\"";
 			}
 			sb.append(this.hashCode() + " -> " + node.hashCode() + "[label = \"  " + label + "\"];\n");
